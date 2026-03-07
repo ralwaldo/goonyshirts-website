@@ -76,21 +76,28 @@ app.post('/create-checkout', async (req, res) => {
   }
 
   try {
-    const lineItems = items.map((item) => ({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.name,
-          description: item.description || '',
-          images: item.image ? [item.image] : [],
-          metadata: {
-            printful_variant_id: item.variantId,
+    console.log('Checkout items received:', JSON.stringify(items));
+
+    const lineItems = items.map((item) => {
+      const price = parseFloat(item.price) || 38.00;
+      const unitAmount = Math.round(price * 100);
+      console.log(`Item: ${item.name}, price: ${price}, unit_amount: ${unitAmount}`);
+      return {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: item.name,
+            description: item.description || '',
+            images: item.image ? [item.image] : [],
+            metadata: {
+              printful_variant_id: String(item.variantId || ''),
+            },
           },
+          unit_amount: unitAmount,
         },
-        unit_amount: Math.round(item.price * 100), // convert to cents
-      },
-      quantity: item.quantity || 1,
-    }));
+        quantity: item.quantity || 1,
+      };
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
