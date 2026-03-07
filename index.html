@@ -1095,7 +1095,7 @@
           <div class="product-info">
             <span class="product-tag">Philosophy 101</span>
             <div class="product-name">${p.name}</div>
-            <div class="product-price">$38.00</div>
+            <div class="product-price">${p.price ? '$' + parseFloat(p.price).toFixed(2) : '$38.00'}</div>
           </div>
         </div>
       `).join('');
@@ -1113,8 +1113,8 @@
     }
   }
 
-  function handleAddToCart(id, name, image) {
-    addToCart({ id, name, image, price: 38.00, variantId: id });
+  function handleAddToCart(id, name, image, price, variantId) {
+    addToCart({ id, name, image, price: parseFloat(price), variantId });
     const btn = document.querySelector(`[data-id="${id}"] .overlay-btn`);
     if (btn) {
       btn.textContent = 'Added ✓';
