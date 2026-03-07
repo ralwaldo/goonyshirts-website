@@ -812,6 +812,168 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Fix cursor on interactive elements */
+  a, button, .product-card, .school-card, select, .modal-close, .modal-overlay {
+    cursor: none !important;
+  }
+
+  /* Product Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 13, 10, 0.85);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 2rem;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--parchment);
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0);
+  }
+
+  .modal-img {
+    height: 400px;
+    overflow: hidden;
+    background: var(--aged);
+  }
+
+  .modal-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-body {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .modal-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .modal-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-select {
+    width: 100%;
+    background: var(--aged);
+    border: 1px solid var(--aged);
+    padding: 0.6rem 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    outline: none;
+    appearance: none;
+    cursor: none;
+  }
+
+  .modal-select:focus {
+    border-color: var(--rust);
+  }
+
+  .modal-add-btn {
+    width: 100%;
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    padding: 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .modal-add-btn:hover { background: var(--rust); }
+  .modal-add-btn:disabled { background: var(--mist); }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0.3rem 0.5rem;
+    cursor: none;
+    z-index: 10;
+  }
+
+  .modal-loading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .modal { grid-template-columns: 1fr; }
+    .modal-img { height: 250px; }
+  }
+
 </style>
 </head>
 <body>
@@ -1001,6 +1163,28 @@
   </ul>
 </footer>
 
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-img" id="modal-img">
+      <img src="" alt="" id="modal-image">
+    </div>
+    <div class="modal-body">
+      <div>
+        <span class="modal-tag">Philosophy 101</span>
+        <div class="modal-name" id="modal-name"></div>
+        <div class="modal-price" id="modal-price"></div>
+        <div id="modal-variants-wrap">
+          <div class="modal-loading">Loading options...</div>
+        </div>
+      </div>
+      <button class="modal-add-btn" id="modal-add-btn" disabled>Select options above</button>
+    </div>
+  </div>
+</div>
+
 <script>
   const API = 'https://goonyshirts-server-production.up.railway.app';
 
@@ -1122,7 +1306,129 @@
     }
   }
 
+  function openProductModal(id) {
+    const product = (window._allProducts || []).find(p => p.id === id);
+    if (product) openModal(product);
+  }
+
   loadProducts();
+
+  // ─── Modal logic ─────────────────────────────────────────────────────────────
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalClose = document.getElementById('modal-close');
+  const modalName = document.getElementById('modal-name');
+  const modalPrice = document.getElementById('modal-price');
+  const modalImage = document.getElementById('modal-image');
+  const modalVariantsWrap = document.getElementById('modal-variants-wrap');
+  const modalAddBtn = document.getElementById('modal-add-btn');
+
+  let currentProduct = null;
+
+  function openModal(product) {
+    currentProduct = product;
+    modalName.textContent = product.name;
+    modalPrice.textContent = product.price ? '$' + parseFloat(product.price).toFixed(2) : '$38.00';
+    modalImage.src = product.thumbnail_url || '';
+    modalImage.alt = product.name;
+    modalVariantsWrap.innerHTML = '<div class="modal-loading">Loading options...</div>';
+    modalAddBtn.disabled = true;
+    modalAddBtn.textContent = 'Select options above';
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Fetch full product details for variants
+    fetch(`${API}/products/${product.id}`)
+      .then(r => r.json())
+      .then(data => {
+        const variants = data.result?.sync_variants || [];
+        if (!variants.length) {
+          modalVariantsWrap.innerHTML = '<div class="modal-loading">No variants available.</div>';
+          return;
+        }
+
+        // Extract unique sizes and colors
+        const sizes = [...new Set(variants.map(v => v.size).filter(Boolean))];
+        const colors = [...new Set(variants.map(v => v.color).filter(Boolean))];
+
+        let html = '';
+        if (colors.length > 0) {
+          html += `<label class="modal-label">Color</label>
+          <select class="modal-select" id="modal-color">
+            <option value="">Select color...</option>
+            ${colors.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>`;
+        }
+        if (sizes.length > 0) {
+          html += `<label class="modal-label">Size</label>
+          <select class="modal-select" id="modal-size">
+            <option value="">Select size...</option>
+            ${sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+          </select>`;
+        }
+
+        modalVariantsWrap.innerHTML = html;
+        modalVariantsWrap._variants = variants;
+
+        // Enable add button when both selected
+        modalVariantsWrap.addEventListener('change', () => {
+          const colorEl = document.getElementById('modal-color');
+          const sizeEl = document.getElementById('modal-size');
+          const colorOk = !colorEl || colorEl.value;
+          const sizeOk = !sizeEl || sizeEl.value;
+          if (colorOk && sizeOk) {
+            modalAddBtn.disabled = false;
+            modalAddBtn.textContent = 'Add to Cart';
+          } else {
+            modalAddBtn.disabled = true;
+            modalAddBtn.textContent = 'Select options above';
+          }
+        });
+      })
+      .catch(() => {
+        modalVariantsWrap.innerHTML = '<div class="modal-loading">Could not load options.</div>';
+      });
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    currentProduct = null;
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+
+  modalAddBtn.addEventListener('click', () => {
+    if (!currentProduct || modalAddBtn.disabled) return;
+    const colorEl = document.getElementById('modal-color');
+    const sizeEl = document.getElementById('modal-size');
+    const color = colorEl ? colorEl.value : '';
+    const size = sizeEl ? sizeEl.value : '';
+
+    // Find matching variant
+    const variants = modalVariantsWrap._variants || [];
+    const match = variants.find(v =>
+      (!color || v.color === color) && (!size || v.size === size)
+    ) || variants[0];
+
+    const price = match?.retail_price || currentProduct.price || 38;
+    addToCart({
+      id: match?.id || currentProduct.id,
+      name: `${currentProduct.name}${color ? ' — ' + color : ''}${size ? ' / ' + size : ''}`,
+      image: currentProduct.thumbnail_url,
+      price: parseFloat(price),
+      variantId: match?.id || currentProduct.variantId
+    });
+
+    modalAddBtn.textContent = 'Added ✓';
+    setTimeout(() => {
+      closeModal();
+      modalAddBtn.textContent = 'Add to Cart';
+    }, 800);
+  });
+
+  // Update loadProducts to open modal on card click (not just overlay button)
+  const _origLoadProducts = loadProducts;
 </script>
 </body>
 </html>
