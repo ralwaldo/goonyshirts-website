@@ -1524,11 +1524,28 @@
 
         // Extract unique sizes
         const sizes = [...new Set(variants.map(v => v.size).filter(Boolean))];
-        // Use colorMap from server (has hex codes from Printful catalog)
-        const colorMap = product.colorMap || {};
-        // Fallback: extract colors from variants if no colorMap
+        // Hardcoded Printful color hex codes
+        const PRINTFUL_COLORS = {
+          'Black Heather': '#0b0b0b',
+          'Vintage Black': '#151515',
+          'Black': '#1e1e1e',
+          'Heather Emerald': '#1E2C1C',
+          'Navy': '#212642',
+          'Red': '#d0071e',
+          'Heather Navy': '#303643',
+          'Forest': '#223e25',
+          'Asphalt': '#52514f',
+          'Heather Brown': '#6A513A',
+          'Heather Clay': '#994836',
+          'Heather Slate': '#4C626E',
+          'Olive': '#5b642f',
+        };
+        // Build colorMap from variants using hardcoded colors
+        const colorMap = {};
         variants.forEach(v => {
-          if (v.color && !(v.color in colorMap)) colorMap[v.color] = null;
+          if (v.color && !(v.color in colorMap)) {
+            colorMap[v.color] = PRINTFUL_COLORS[v.color] || null;
+          }
         });
 
         let html = '';
