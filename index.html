@@ -1613,28 +1613,6 @@
   // Update loadProducts to open modal on card click (not just overlay button)
   const _origLoadProducts = loadProducts;
 </script>
-<!-- Back to Collection button - shows after visiting Stripe -->
-<div id="back-btn-wrap" style="display:none; position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); z-index:9999;">
-  <a href="https://goonyshirts.com/#products" style="
-    display:inline-block;
-    background:#0f0d0a;
-    color:#f5f0e8;
-    font-family:'DM Mono',monospace;
-    font-size:0.75rem;
-    letter-spacing:0.15em;
-    text-transform:uppercase;
-    padding:1rem 2rem;
-    border:1px solid #3a3530;
-    text-decoration:none;
-    cursor:pointer;
-  ">← Back to Collection</a>
-</div>
 
-<script>
-  // Show back button if user came from Stripe (has session_id or referrer is stripe)
-  if (document.referrer.includes('stripe.com') || window.location.search.includes('session_id')) {
-    document.getElementById('back-btn-wrap').style.display = 'block';
-  }
-</script>
 </body>
 </html>
