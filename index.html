@@ -1398,6 +1398,14 @@
     if (product) openModal(product);
   }
 
+  // Use event delegation for product card clicks
+  document.getElementById('products-grid').addEventListener('click', function(e) {
+    const card = e.target.closest('.product-card');
+    if (!card) return;
+    const id = parseInt(card.dataset.id);
+    openProductModal(id);
+  });
+
   loadProducts();
 
   // ─── Modal logic ─────────────────────────────────────────────────────────────
