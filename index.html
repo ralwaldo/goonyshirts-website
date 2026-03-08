@@ -1512,13 +1512,13 @@
           return;
         }
 
-        // Extract unique sizes and colors with hex codes
+        // Extract unique sizes
         const sizes = [...new Set(variants.map(v => v.size).filter(Boolean))];
-        const colorMap = {};
+        // Use colorMap from server (has hex codes from Printful catalog)
+        const colorMap = product.colorMap || {};
+        // Fallback: extract colors from variants if no colorMap
         variants.forEach(v => {
-          if (v.color && !colorMap[v.color]) {
-            colorMap[v.color] = v.color_code || v.color_code2 || null;
-          }
+          if (v.color && !(v.color in colorMap)) colorMap[v.color] = null;
         });
 
         let html = '';
