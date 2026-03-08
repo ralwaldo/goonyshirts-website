@@ -1375,84 +1375,6 @@
 
   updateCartUI();
 
-  // Cart drawer
-  const cartOverlay = document.getElementById('cart-overlay');
-  const cartClose = document.getElementById('cart-close');
-  const cartItems = document.getElementById('cart-items');
-  const cartTotal = document.getElementById('cart-total');
-  const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
-
-  function renderCartDrawer() {
-    if (cart.length === 0) {
-      cartItems.innerHTML = '<p style="font-family:DM Mono,monospace;font-size:0.75rem;color:#8a8075;text-align:center;padding:2rem;letter-spacing:0.1em;">Your cart is empty.</p>';
-      cartTotal.textContent = '$0.00';
-      return;
-    }
-    cartItems.innerHTML = cart.map((item, idx) => `
-      <div style="display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #d4cfc8;">
-        ${item.image ? `<img src="${item.image}" style="width:70px;height:70px;object-fit:cover;flex-shrink:0;">` : ''}
-        <div style="flex:1;">
-          <div style="font-family:'Playfair Display',serif;font-size:0.9rem;color:#0f0d0a;margin-bottom:0.25rem;">${item.name}</div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#8a8075;">Qty: ${item.quantity || 1}</div>
-          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#0f0d0a;">$${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</div>
-        </div>
-        <button onclick="removeFromCart(${idx})" style="background:none;border:none;color:#8a8075;cursor:pointer;font-size:1rem;padding:0;">✕</button>
-      </div>
-    `).join('');
-    const total = cart.reduce((sum, i) => sum + parseFloat(i.price) * (i.quantity || 1), 0);
-    cartTotal.textContent = '$' + total.toFixed(2);
-  }
-
-  function removeFromCart(idx) {
-    cart.splice(idx, 1);
-    updateCartUI();
-    saveCart();
-    renderCartDrawer();
-  }
-
-  function openCartDrawer() {
-    renderCartDrawer();
-    cartOverlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCartDrawer() {
-    cartOverlay.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  cartClose.addEventListener('click', closeCartDrawer);
-  cartOverlay.addEventListener('click', e => { if (e.target === cartOverlay) closeCartDrawer(); });
-
-  // Checkout
-  cartBtn.addEventListener('click', () => {
-    if (cart.length === 0) return;
-    openCartDrawer();
-  });
-
-  cartCheckoutBtn.addEventListener('click', async () => {
-    if (cart.length === 0) return;
-    try {
-      cartCheckoutBtn.textContent = 'Loading...';
-      const res = await fetch(`${API}/create-checkout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart })
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        alert('Checkout failed. Please try again.');
-        cartCheckoutBtn.textContent = 'Proceed to Checkout';
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Could not connect to checkout. Please try again.');
-      cartCheckoutBtn.textContent = 'Proceed to Checkout';
-    }
-  });
-
   // Load real products from Printful via Railway
   async function loadProducts() {
     const grid = document.getElementById('products-grid');
@@ -1683,5 +1605,85 @@
     </div>
   </div>
 </div>
+<script>
+  // Cart drawer
+  const cartOverlay = document.getElementById('cart-overlay');
+  const cartClose = document.getElementById('cart-close');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
+
+  function renderCartDrawer() {
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p style="font-family:DM Mono,monospace;font-size:0.75rem;color:#8a8075;text-align:center;padding:2rem;letter-spacing:0.1em;">Your cart is empty.</p>';
+      cartTotal.textContent = '$0.00';
+      return;
+    }
+    cartItems.innerHTML = cart.map((item, idx) => `
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #d4cfc8;">
+        ${item.image ? `<img src="${item.image}" style="width:70px;height:70px;object-fit:cover;flex-shrink:0;">` : ''}
+        <div style="flex:1;">
+          <div style="font-family:'Playfair Display',serif;font-size:0.9rem;color:#0f0d0a;margin-bottom:0.25rem;">${item.name}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#8a8075;">Qty: ${item.quantity || 1}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#0f0d0a;">$${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</div>
+        </div>
+        <button onclick="removeFromCart(${idx})" style="background:none;border:none;color:#8a8075;cursor:pointer;font-size:1rem;padding:0;">✕</button>
+      </div>
+    `).join('');
+    const total = cart.reduce((sum, i) => sum + parseFloat(i.price) * (i.quantity || 1), 0);
+    cartTotal.textContent = '$' + total.toFixed(2);
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    updateCartUI();
+    saveCart();
+    renderCartDrawer();
+  }
+
+  function openCartDrawer() {
+    renderCartDrawer();
+    cartOverlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCartDrawer() {
+    cartOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  cartClose.addEventListener('click', closeCartDrawer);
+  cartOverlay.addEventListener('click', e => { if (e.target === cartOverlay) closeCartDrawer(); });
+
+  // Checkout
+  cartBtn.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    openCartDrawer();
+  });
+
+  cartCheckoutBtn.addEventListener('click', async () => {
+    if (cart.length === 0) return;
+    try {
+      cartCheckoutBtn.textContent = 'Loading...';
+      const res = await fetch(`${API}/create-checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Checkout failed. Please try again.');
+        cartCheckoutBtn.textContent = 'Proceed to Checkout';
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Could not connect to checkout. Please try again.');
+      cartCheckoutBtn.textContent = 'Proceed to Checkout';
+    }
+  });
+</script>
 </body>
 </html>
+
