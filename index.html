@@ -1517,6 +1517,7 @@
       .then(r => r.json())
       .then(data => {
         const variants = data.result?.sync_variants || [];
+        console.log('Colors from Printful:', [...new Set(variants.map(v => v.color).filter(Boolean))]);
         if (!variants.length) {
           modalVariantsWrap.innerHTML = '<div class="modal-loading">No variants available.</div>';
           return;
@@ -1544,7 +1545,13 @@
         const colorMap = {};
         variants.forEach(v => {
           if (v.color && !(v.color in colorMap)) {
-            colorMap[v.color] = PRINTFUL_COLORS[v.color] || null;
+            // Try exact match first, then case-insensitive match
+            const exactMatch = PRINTFUL_COLORS[v.color];
+            const lowerColor = v.color.toLowerCase();
+            const looseMatch = Object.entries(PRINTFUL_COLORS).find(
+              ([k]) => k.toLowerCase() === lowerColor
+            );
+            colorMap[v.color] = exactMatch || (looseMatch && looseMatch[1]) || '#888888';
           }
         });
 
