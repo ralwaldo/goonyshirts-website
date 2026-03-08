@@ -1292,10 +1292,25 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Cart
+  // Cart — persisted in localStorage
   let cart = [];
   let cartCount = 0;
   const cartBtn = document.querySelector('.nav-cart');
+
+  function saveCart() {
+    try { localStorage.setItem('goonyshirts_cart', JSON.stringify(cart)); } catch(e) {}
+  }
+
+  function loadCart() {
+    try {
+      const saved = localStorage.getItem('goonyshirts_cart');
+      if (saved) {
+        cart = JSON.parse(saved);
+        cartCount = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
+        updateCartUI();
+      }
+    } catch(e) {}
+  }
 
   function updateCartUI() {
     cartBtn.textContent = `Cart (${cartCount})`;
@@ -1310,7 +1325,10 @@
     }
     cartCount++;
     updateCartUI();
+    saveCart();
   }
+
+  loadCart();
 
   // Checkout
   cartBtn.addEventListener('click', async () => {
@@ -1324,6 +1342,11 @@
       });
       const data = await res.json();
       if (data.url) {
+        // Clear cart after redirecting to Stripe
+        cart = [];
+        cartCount = 0;
+        updateCartUI();
+        saveCart();
         window.location.href = data.url;
       } else {
         alert('Checkout failed. Please try again.');
