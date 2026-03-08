@@ -1645,6 +1645,11 @@
     renderCartDrawer();
     cartOverlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
+    // Register cursor hover on drawer elements
+    cartOverlay.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
   }
 
   function closeCartDrawer() {
