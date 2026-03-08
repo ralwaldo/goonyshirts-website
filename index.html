@@ -1375,11 +1375,65 @@
 
   updateCartUI();
 
+  // Cart drawer
+  const cartOverlay = document.getElementById('cart-overlay');
+  const cartClose = document.getElementById('cart-close');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
+
+  function renderCartDrawer() {
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p style="font-family:DM Mono,monospace;font-size:0.75rem;color:#8a8075;text-align:center;padding:2rem;letter-spacing:0.1em;">Your cart is empty.</p>';
+      cartTotal.textContent = '$0.00';
+      return;
+    }
+    cartItems.innerHTML = cart.map((item, idx) => `
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #d4cfc8;">
+        ${item.image ? `<img src="${item.image}" style="width:70px;height:70px;object-fit:cover;flex-shrink:0;">` : ''}
+        <div style="flex:1;">
+          <div style="font-family:'Playfair Display',serif;font-size:0.9rem;color:#0f0d0a;margin-bottom:0.25rem;">${item.name}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#8a8075;">Qty: ${item.quantity || 1}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#0f0d0a;">$${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</div>
+        </div>
+        <button onclick="removeFromCart(${idx})" style="background:none;border:none;color:#8a8075;cursor:pointer;font-size:1rem;padding:0;">✕</button>
+      </div>
+    `).join('');
+    const total = cart.reduce((sum, i) => sum + parseFloat(i.price) * (i.quantity || 1), 0);
+    cartTotal.textContent = '$' + total.toFixed(2);
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    updateCartUI();
+    saveCart();
+    renderCartDrawer();
+  }
+
+  function openCartDrawer() {
+    renderCartDrawer();
+    cartOverlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCartDrawer() {
+    cartOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  cartClose.addEventListener('click', closeCartDrawer);
+  cartOverlay.addEventListener('click', e => { if (e.target === cartOverlay) closeCartDrawer(); });
+
   // Checkout
-  cartBtn.addEventListener('click', async () => {
+  cartBtn.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    openCartDrawer();
+  });
+
+  cartCheckoutBtn.addEventListener('click', async () => {
     if (cart.length === 0) return;
     try {
-      cartBtn.textContent = 'Loading...';
+      cartCheckoutBtn.textContent = 'Loading...';
       const res = await fetch(`${API}/create-checkout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1387,16 +1441,15 @@
       });
       const data = await res.json();
       if (data.url) {
-        // Don't clear cart here - clear it only on success page
         window.location.href = data.url;
       } else {
         alert('Checkout failed. Please try again.');
-        updateCartUI();
+        cartCheckoutBtn.textContent = 'Proceed to Checkout';
       }
     } catch (err) {
       console.error(err);
       alert('Could not connect to checkout. Please try again.');
-      updateCartUI();
+      cartCheckoutBtn.textContent = 'Proceed to Checkout';
     }
   });
 
@@ -1614,5 +1667,22 @@
   const _origLoadProducts = loadProducts;
 </script>
 
+<!-- Cart Drawer -->
+<div id="cart-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000;">
+  <div id="cart-drawer" style="position:absolute; right:0; top:0; bottom:0; width:380px; max-width:100vw; background:#f5f0e8; display:flex; flex-direction:column;">
+    <div style="padding:1.5rem; border-bottom:1px solid #d4cfc8; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#0f0d0a;">Your Cart</span>
+      <button id="cart-close" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#0f0d0a;">✕</button>
+    </div>
+    <div id="cart-items" style="flex:1; overflow-y:auto; padding:1rem;"></div>
+    <div style="padding:1.5rem; border-top:1px solid #d4cfc8;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+        <span style="font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase;">Total</span>
+        <span id="cart-total" style="font-family:'DM Mono',monospace; font-size:0.75rem; color:#0f0d0a;"></span>
+      </div>
+      <button id="cart-checkout-btn" style="width:100%; padding:1rem; background:#0f0d0a; color:#f5f0e8; border:none; font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer;">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
