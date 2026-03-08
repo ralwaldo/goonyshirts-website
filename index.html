@@ -1382,6 +1382,12 @@
     saveCart();
   }
 
+  // Clear cart if returning from successful Stripe checkout
+  if (window.location.search.includes('session_id=')) {
+    window._cart = [];
+    saveCart();
+  }
+
   updateCartUI();
 
   // Checkout
@@ -1396,10 +1402,7 @@
       });
       const data = await res.json();
       if (data.url) {
-        // Clear cart after redirecting to Stripe
-        window._cart = [];
-        updateCartUI();
-        saveCart();
+        // Don't clear cart here - clear it only on success page
         window.location.href = data.url;
       } else {
         alert('Checkout failed. Please try again.');
