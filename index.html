@@ -974,6 +974,93 @@
     .modal-img { height: 250px; }
   }
 
+
+  /* ── Mobile fixes ─────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem 1.2rem;
+    }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-text {
+      padding: 7rem 1.5rem 2rem;
+    }
+    .hero-image { display: none; }
+    .philosophy {
+      grid-template-columns: 1fr;
+      padding: 4rem 1.5rem;
+      gap: 2rem;
+    }
+    .philosophy-stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .products {
+      padding: 4rem 1rem;
+    }
+    .products-grid {
+      grid-template-columns: 1fr !important;
+      gap: 2px;
+    }
+    .product-img-wrap {
+      height: 280px;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .quote-section {
+      padding: 4rem 1.5rem;
+    }
+    .quote-section::before {
+      font-size: 15rem;
+    }
+    .manifesto {
+      grid-template-columns: 1fr;
+      padding: 4rem 1.5rem;
+      gap: 2rem;
+    }
+    .schools {
+      padding: 4rem 1.5rem;
+    }
+    .schools-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .newsletter {
+      padding: 4rem 1.5rem;
+    }
+    .newsletter-form {
+      flex-direction: column;
+    }
+    .newsletter-form input {
+      border-right: 1px solid #3a3530;
+      border-bottom: none;
+    }
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .footer-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .modal {
+      grid-template-columns: 1fr;
+      max-height: 95vh;
+    }
+    .modal-img {
+      height: 220px;
+    }
+    .modal-body {
+      padding: 1.5rem;
+    }
+  }
+
 </style>
 </head>
 <body>
