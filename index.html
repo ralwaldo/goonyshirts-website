@@ -1349,6 +1349,9 @@
         return;
       }
 
+      // Store products globally for modal
+      window._allProducts = products;
+
       grid.innerHTML = products.map(p => `
         <div class="product-card reveal" data-id="${p.id}">
           <div class="product-img-wrap">
@@ -1361,7 +1364,7 @@
             }
           </div>
           <div class="product-overlay">
-            <button class="overlay-btn" onclick="handleAddToCart(${p.id}, '${p.name.replace(/'/g,"\'")}', ${p.thumbnail_url ? `'${p.thumbnail_url}'` : 'null'})">Add to Cart</button>
+            <button class="overlay-btn">Choose Options</button>
           </div>
           <div class="product-info">
             <span class="product-tag">Philosophy 101</span>
