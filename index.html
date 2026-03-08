@@ -1339,52 +1339,37 @@
 
   // Cart — persisted in localStorage
   const cartBtn = document.querySelector('.nav-cart');
-
-  function saveCart() {
-    try { localStorage.setItem('goonyshirts_cart', JSON.stringify(window._cart)); } catch(e) {}
-  }
-
-  // Load cart immediately from localStorage
-  let _cartData = [];
-  let _cartCount = 0;
+  
+  // Load cart from localStorage immediately on page load
+  let cart = [];
   try {
     const saved = localStorage.getItem('goonyshirts_cart');
-    if (saved) {
-      _cartData = JSON.parse(saved);
-      _cartCount = _cartData.reduce((sum, i) => sum + (i.quantity || 1), 0);
-    }
-  } catch(e) {}
+    if (saved) cart = JSON.parse(saved);
+  } catch(e) { cart = []; }
 
-  window._cart = _cartData;
-  window._cartCount = _cartCount;
+  // Clear cart only if returning from successful Stripe checkout
+  if (window.location.search.includes('session_id=')) {
+    cart = [];
+    localStorage.removeItem('goonyshirts_cart');
+  }
 
-  // Use window._cart everywhere so it can't be accidentally reset
-  Object.defineProperty(window, 'cart', {
-    get() { return window._cart; },
-    set(v) { window._cart = v; }
-  });
-
-  let cartCount = window._cartCount;
+  function saveCart() {
+    localStorage.setItem('goonyshirts_cart', JSON.stringify(cart));
+  }
 
   function updateCartUI() {
-    cartCount = window._cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
-    cartBtn.textContent = `Cart (${cartCount})`;
+    const count = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
+    cartBtn.textContent = 'Cart (' + count + ')';
   }
 
   function addToCart(product) {
-    const existing = window._cart.find(i => i.id === product.id && i.size === product.size && i.color === product.color);
+    const existing = cart.find(i => i.id === product.id && i.size === product.size && i.color === product.color);
     if (existing) {
       existing.quantity++;
     } else {
-      window._cart.push({ ...product, quantity: 1 });
+      cart.push({ ...product, quantity: 1 });
     }
     updateCartUI();
-    saveCart();
-  }
-
-  // Clear cart if returning from successful Stripe checkout
-  if (window.location.search.includes('session_id=')) {
-    window._cart = [];
     saveCart();
   }
 
@@ -1627,6 +1612,29 @@
 
   // Update loadProducts to open modal on card click (not just overlay button)
   const _origLoadProducts = loadProducts;
+</script>
+<!-- Back to Collection button - shows after visiting Stripe -->
+<div id="back-btn-wrap" style="display:none; position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); z-index:9999;">
+  <a href="https://goonyshirts.com/#products" style="
+    display:inline-block;
+    background:#0f0d0a;
+    color:#f5f0e8;
+    font-family:'DM Mono',monospace;
+    font-size:0.75rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    padding:1rem 2rem;
+    border:1px solid #3a3530;
+    text-decoration:none;
+    cursor:pointer;
+  ">← Back to Collection</a>
+</div>
+
+<script>
+  // Show back button if user came from Stripe (has session_id or referrer is stripe)
+  if (document.referrer.includes('stripe.com') || window.location.search.includes('session_id')) {
+    document.getElementById('back-btn-wrap').style.display = 'block';
+  }
 </script>
 </body>
 </html>
