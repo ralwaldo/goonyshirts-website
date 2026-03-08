@@ -1061,6 +1061,51 @@
     }
   }
 
+
+  /* Color swatches */
+  .color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .color-swatch-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--aged);
+    cursor: none;
+    transition: border-color 0.2s;
+    background: white;
+  }
+
+  .color-swatch-item:hover {
+    border-color: var(--slate);
+  }
+
+  .color-swatch-item.selected {
+    border-color: var(--rust);
+    background: var(--parchment);
+  }
+
+  .color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+  }
+
+  .color-swatch-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
 </style>
 </head>
 <body>
@@ -1467,20 +1512,30 @@
           return;
         }
 
-        // Extract unique sizes and colors
+        // Extract unique sizes and colors with hex codes
         const sizes = [...new Set(variants.map(v => v.size).filter(Boolean))];
-        const colors = [...new Set(variants.map(v => v.color).filter(Boolean))];
+        const colorMap = {};
+        variants.forEach(v => {
+          if (v.color && !colorMap[v.color]) {
+            colorMap[v.color] = v.color_code || v.color_code2 || null;
+          }
+        });
 
         let html = '';
-        if (colors.length > 0) {
+        if (Object.keys(colorMap).length > 0) {
           html += `<label class="modal-label">Color</label>
-          <select class="modal-select" id="modal-color">
-            <option value="">Select color...</option>
-            ${colors.map(c => `<option value="${c}">${c}</option>`).join('')}
-          </select>`;
+          <div class="color-swatches" id="modal-color-swatches">
+            ${Object.entries(colorMap).map(([name, hex]) => `
+              <div class="color-swatch-item" data-color="${name}" title="${name}">
+                <span class="color-dot" style="background:${hex || '#ccc'};"></span>
+                <span class="color-swatch-name">${name}</span>
+              </div>
+            `).join('')}
+          </div>
+          <input type="hidden" id="modal-color" value="">`;
         }
         if (sizes.length > 0) {
-          html += `<label class="modal-label">Size</label>
+          html += `<label class="modal-label" style="margin-top:0.8rem;">Size</label>
           <select class="modal-select" id="modal-size">
             <option value="">Select size...</option>
             ${sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
@@ -1490,8 +1545,18 @@
         modalVariantsWrap.innerHTML = html;
         modalVariantsWrap._variants = variants;
 
+        // Color swatch click handler
+        modalVariantsWrap.querySelectorAll('.color-swatch-item').forEach(item => {
+          item.addEventListener('click', () => {
+            modalVariantsWrap.querySelectorAll('.color-swatch-item').forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            document.getElementById('modal-color').value = item.dataset.color;
+            checkModalReady();
+          });
+        });
+
         // Enable add button when both selected
-        modalVariantsWrap.addEventListener('change', () => {
+        function checkModalReady() {
           const colorEl = document.getElementById('modal-color');
           const sizeEl = document.getElementById('modal-size');
           const colorOk = !colorEl || colorEl.value;
@@ -1503,7 +1568,8 @@
             modalAddBtn.disabled = true;
             modalAddBtn.textContent = 'Select options above';
           }
-        });
+        }
+        modalVariantsWrap.addEventListener('change', checkModalReady);
       })
       .catch(() => {
         modalVariantsWrap.innerHTML = '<div class="modal-loading">Could not load options.</div>';
