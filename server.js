@@ -87,7 +87,7 @@ app.post('/create-checkout', async (req, res) => {
           currency: 'usd',
           product_data: {
             name: item.name,
-            description: item.description || '',
+          
             images: item.image ? [item.image] : [],
             metadata: {
               printful_variant_id: String(item.variantId || ''),
