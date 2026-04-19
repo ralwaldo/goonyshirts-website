@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goonyshirts — Wear the Question, Not the Answer</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="Goonyshirts — Philosophy-inspired t-shirts for the perpetually curious. Wear the question, not the answer. Unique designs featuring Descartes, Socrates, and more.">
+<meta name="keywords" content="philosophy t-shirts, philosophical shirts, Descartes shirt, Socrates shirt, unique graphic tees, goonyshirts">
+<meta name="author" content="Goonyshirts">
+<link rel="canonical" href="https://goonyshirts.com/">
+
+<!-- Open Graph (Facebook, iMessage, LinkedIn previews) -->
+<meta property="og:title" content="Goonyshirts — Wear the Question, Not the Answer">
+<meta property="og:description" content="Philosophy-inspired t-shirts for the perpetually curious. Unique designs that make you think.">
+<meta property="og:url" content="https://goonyshirts.com">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://goonyshirts.com/og-image.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Goonyshirts — Wear the Question, Not the Answer">
+<meta name="twitter:description" content="Philosophy-inspired t-shirts for the perpetually curious.">
+<meta name="twitter:image" content="https://goonyshirts.com/og-image.jpg">
+
+<!-- Structured Data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Goonyshirts",
+  "url": "https://goonyshirts.com",
+  "description": "Philosophy-inspired t-shirts for the perpetually curious.",
+  "logo": "https://goonyshirts.com/og-image.jpg",
+  "sameAs": [],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://goonyshirts.com/#products",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N0KDL9GVF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-N0KDL9GVF6');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0d0a;
+    --parchment: #f5f0e8;
+    --aged: #e8dfc8;
+    --rust: #b84a24;
+    --gold: #c9962a;
+    --slate: #4a4640;
+    --mist: #9e9890;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: var(--rust);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+  }
+  .cursor.hover {
+    width: 40px;
+    height: 40px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(245, 240, 232, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--aged);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--rust); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--rust);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cart {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 0.5rem 1.2rem;
+    border: none;
+    cursor: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cart:hover { background: var(--rust); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--slate);
+    max-width: 38ch;
+    margin-bottom: 3rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 0.9rem 2.2rem;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--rust);
+    transform: translateX(-101%);
+    transition: transform 0.3s ease;
+  }
+
+  .btn-primary:hover::before { transform: translateX(0); }
+  .btn-primary span { position: relative; z-index: 1; }
+
+  .btn-secondary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink);
+    padding: 0.9rem 2.2rem;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    background: var(--aged);
+  }
+
+  .hero-image {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--aged);
+    animation: fadeIn 1s 0.2s ease both;
+  }
+
+  .hero-shirt-display {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .shirt-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .hero-quote {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--mist);
+    text-align: right;
+    max-width: 22ch;
+    line-height: 1.4;
+  }
+
+  .hero-quote cite {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 0.85rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 30s linear infinite;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .marquee-inner span { color: var(--gold); margin: 0 1rem; }
+
+  /* SECTION: PHILOSOPHY */
+  .philosophy {
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+    border-top: 1px solid var(--aged);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--mist);
+    position: sticky;
+    top: 6rem;
+  }
+
+  .section-label::before {
+    content: '//';
+    color: var(--rust);
+    margin-right: 0.5rem;
+  }
+
+  .philosophy-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.8rem;
+  }
+
+  .philosophy-content h2 em {
+    font-style: italic;
+    color: var(--rust);
+  }
+
+  .philosophy-content p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--slate);
+    margin-bottom: 1.2rem;
+    max-width: 55ch;
+  }
+
+  .philosophy-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--aged);
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--rust);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* PRODUCTS */
+  .products {
+    padding: 6rem 5rem;
+    background: var(--ink);
+    color: var(--parchment);
+  }
+
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .products-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .products-header h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .products-header a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .products-header a:hover { color: var(--gold); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .product-card {
+    position: relative;
+    background: #1a1714;
+    overflow: hidden;
+    cursor: none;
+    group: true;
+  }
+
+  .product-card:hover .product-img-wrap { transform: scale(1.04); }
+  .product-card:hover .product-overlay { opacity: 1; }
+
+  .product-img-wrap {
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+    background: #221f1b;
+    padding: 2rem;
+  }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(184, 74, 36, 0.15);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .overlay-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--parchment);
+    color: var(--ink);
+    padding: 0.6rem 1.5rem;
+    border: none;
+    cursor: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-info {
+    padding: 1.5rem;
+  }
+
+  .product-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+
+  .product-quote {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--mist);
+    margin-bottom: 0.8rem;
+  }
+
+  .product-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: var(--parchment);
+  }
+
+  /* SHIRT SVG for products */
+  .shirt-icon {
+    width: 160px;
+    height: 180px;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+  }
+
+  .product-card:hover .shirt-icon { opacity: 1; }
+
+  /* QUOTE SECTION */
+  .quote-section {
+    padding: 7rem 5rem;
+    text-align: center;
+    border-top: 1px solid var(--aged);
+    border-bottom: 1px solid var(--aged);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-section::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 40rem;
+    color: var(--aged);
+    position: absolute;
+    top: -8rem;
+    left: -3rem;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .quote-section blockquote {
+    position: relative;
+    z-index: 1;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    font-weight: 400;
+    font-style: italic;
+    max-width: 700px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.4;
+  }
+
+  .quote-section cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+    font-style: normal;
+  }
+
+  /* ABOUT / MANIFESTO */
+  .manifesto {
+    padding: 8rem 5rem;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .manifesto-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1.8rem;
+  }
+
+  .manifesto-text h2 em { font-style: italic; color: var(--rust); }
+
+  .manifesto-text p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--slate);
+    margin-bottom: 1rem;
+    max-width: 50ch;
+  }
+
+  .manifesto-pullquote {
+    background: var(--aged);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .manifesto-pullquote::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--rust);
+  }
+
+  .manifesto-pullquote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* SCHOOLS OF THOUGHT */
+  .schools {
+    padding: 6rem 5rem;
+    background: var(--aged);
+  }
+
+  .schools h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 3rem;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .schools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .school-card {
+    background: var(--parchment);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: none;
+  }
+
+  .school-card:hover {
+    border-color: var(--rust);
+    transform: translateY(-4px);
+  }
+
+  .school-glyph {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .school-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .school-desc {
+    font-size: 0.85rem;
+    color: var(--mist);
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  /* NEWSLETTER */
+  .newsletter {
+    padding: 7rem 5rem;
+    text-align: center;
+    background: var(--ink);
+    color: var(--parchment);
+  }
+
+  .newsletter h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+  }
+
+  .newsletter h2 em { font-style: italic; color: var(--gold); }
+
+  .newsletter p {
+    font-size: 1rem;
+    color: var(--mist);
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    max-width: 45ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsletter-form {
+    display: flex;
+    max-width: 450px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    background: #1a1714;
+    border: 1px solid #3a3530;
+    border-right: none;
+    padding: 0.9rem 1.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--parchment);
+    outline: none;
+  }
+
+  .newsletter-form input::placeholder { color: var(--slate); }
+
+  .newsletter-form button {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--rust);
+    color: var(--parchment);
+    border: none;
+    padding: 0.9rem 1.5rem;
+    cursor: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .newsletter-form button:hover { background: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 5rem;
+    border-top: 1px solid #2a2520;
+    background: var(--ink);
+    color: var(--mist);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--parchment);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--rust); }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-16px); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Fix cursor on interactive elements */
+  a, button, .product-card, .school-card, select, .modal-close, .modal-overlay {
+    cursor: none !important;
+  }
+
+  /* Product Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 13, 10, 0.85);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    padding: 2rem;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--parchment);
+    max-width: 700px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+    border-radius: 2px;
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0);
+  }
+
+  .modal-img {
+    height: 400px;
+    overflow: hidden;
+    background: var(--aged);
+  }
+
+  .modal-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-body {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .modal-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+
+  .modal-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-select {
+    width: 100%;
+    background: var(--aged);
+    border: 1px solid var(--aged);
+    padding: 0.6rem 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    outline: none;
+    appearance: none;
+    cursor: none;
+  }
+
+  .modal-select:focus {
+    border-color: var(--rust);
+  }
+
+  .modal-add-btn {
+    width: 100%;
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    padding: 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: none;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .modal-add-btn:hover { background: var(--rust); }
+  .modal-add-btn:disabled { background: var(--mist); }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0.3rem 0.5rem;
+    cursor: none;
+    z-index: 10;
+  }
+
+  .modal-loading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .modal { grid-template-columns: 1fr; }
+    .modal-img { height: 250px; }
+  }
+
+
+  /* ── Mobile fixes ─────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    nav {
+      padding: 1rem 1.2rem;
+    }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .hero-text {
+      padding: 7rem 1.5rem 2rem;
+    }
+    .hero-image { display: none; }
+    .philosophy {
+      grid-template-columns: 1fr;
+      padding: 4rem 1.5rem;
+      gap: 2rem;
+    }
+    .philosophy-stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .products {
+      padding: 4rem 1rem;
+    }
+    .products-grid {
+      grid-template-columns: 1fr !important;
+      gap: 2px;
+    }
+    .product-img-wrap {
+      height: 280px;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .quote-section {
+      padding: 4rem 1.5rem;
+    }
+    .quote-section::before {
+      font-size: 15rem;
+    }
+    .manifesto {
+      grid-template-columns: 1fr;
+      padding: 4rem 1.5rem;
+      gap: 2rem;
+    }
+    .schools {
+      padding: 4rem 1.5rem;
+    }
+    .schools-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .newsletter {
+      padding: 4rem 1.5rem;
+    }
+    .newsletter-form {
+      flex-direction: column;
+    }
+    .newsletter-form input {
+      border-right: 1px solid #3a3530;
+      border-bottom: none;
+    }
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .footer-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .modal {
+      grid-template-columns: 1fr;
+      max-height: 95vh;
+    }
+    .modal-img {
+      height: 220px;
+    }
+    .modal-body {
+      padding: 1.5rem;
+    }
+  }
+
+
+  /* Color swatches */
+  .color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .color-swatch-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--aged);
+    cursor: none;
+    transition: border-color 0.2s;
+    background: white;
+  }
+
+  .color-swatch-item:hover {
+    border-color: var(--slate);
+  }
+
+  .color-swatch-item.selected {
+    border-color: var(--rust);
+    background: var(--parchment);
+  }
+
+  .color-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+  }
+
+  .color-swatch-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .color-swatch-item {
+      padding: 0.6rem 1rem;
+    }
+    .color-dot {
+      width: 30px;
+      height: 30px;
+    }
+    .color-swatch-name {
+      font-size: 0.78rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Goony<span>shirts</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#manifesto">Manifesto</a></li>
+    <li><a href="#schools">Traditions</a></li>
+    <li><a href="#newsletter">Contact</a></li>
+  </ul>
+  <button class="nav-cart">Cart (0)</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Est. MMXXV · Apparel for the Examined Life</p>
+    <h1 class="hero-title">
+      Wear<br>the <em>Question,</em><br>Not the Answer.
+    </h1>
+    <p class="hero-subtitle">
+      T-shirts for the perpetually curious. Socrates died for your right to overthink your wardrobe.
+    </p>
+    <div class="hero-cta">
+      <a href="#products" class="btn-primary"><span>Browse the Collection</span></a>
+      <a href="#manifesto" class="btn-secondary">Our Philosophy</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-shirt-display">
+      <img src="hero-shirt.png" alt="Therefore I Am, I Think shirt" style="width:100%;height:100%;object-fit:cover;object-position:center center;">
+    </div>
+    <div class="hero-quote">
+      "The unexamined life is not worth living — but an unexamined shirt is just a rag."
+      <cite>— Goonyshirts</cite>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-inner">
+    Existentialism <span>✦</span> Stoicism <span>✦</span> Absurdism <span>✦</span> Nihilism <span>✦</span> Empiricism <span>✦</span> Rationalism <span>✦</span> Phenomenology <span>✦</span> Utilitarianism <span>✦</span> Virtue Ethics <span>✦</span> Hermeneutics <span>✦</span> Dialectics <span>✦</span> Pragmatism &nbsp;&nbsp;&nbsp;&nbsp;
+    Existentialism <span>✦</span> Stoicism <span>✦</span> Absurdism <span>✦</span> Nihilism <span>✦</span> Empiricism <span>✦</span> Rationalism <span>✦</span> Phenomenology <span>✦</span> Utilitarianism <span>✦</span> Virtue Ethics <span>✦</span> Hermeneutics <span>✦</span> Dialectics <span>✦</span> Pragmatism &nbsp;&nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div>
+    <p class="section-label">Our approach</p>
+  </div>
+  <div class="philosophy-content reveal">
+    <h2>Clothing that makes you <em>think</em> before you get dressed.</h2>
+    <p>Every Goonyshirt begins with a big idea — a question that has rattled around the skulls of the greatest thinkers in history. We then print it on a really comfortable shirt.</p>
+    <p>We believe philosophy is too important to be locked in academia. Bring Nietzsche to the farmer's market. Take Camus to the gym. Let Wittgenstein ruin your dinner party.</p>
+    <div class="philosophy-stats">
+      <div class="stat-item">
+        <span class="stat-num">42</span>
+        <span class="stat-label">Shirt Designs</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2,600</span>
+        <span class="stat-label">Years of ideas</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Questions raised</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-header reveal">
+    <h2>The <em>Collection</em></h2>
+    <a href="#">View all shirts →</a>
+  </div>
+  <div class="products-grid" id="products-grid">
+    <div style="grid-column:1/-1; text-align:center; padding:4rem; color:var(--mist); font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase;">
+      Loading collection...
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BREAK -->
+<section class="quote-section">
+  <blockquote>
+    "The more I read, the more I acquire, the more certain I am that I know nothing — which is why I buy another shirt."
+  </blockquote>
+  <cite>— Voltaire (paraphrased, liberally)</cite>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="manifesto-text reveal">
+    <h2>We exist because <em>ideas deserve</em> to be worn.</h2>
+    <p>Philosophy is not an ivory tower exercise. It is the original punk. It questions authority, disturbs comfort, and insists on honesty in a world of convenient fictions.</p>
+    <p>Goonyshirts was born from the belief that the best conversations happen when something on your chest makes a stranger stop and think. Or laugh. Or argue with you at a bus stop.</p>
+    <p>We work with ethically sourced fabrics, local printers, and big, uncomfortable ideas. Each shirt is a provocation, gently laundered.</p>
+    <a href="#products" class="btn-primary" style="margin-top:1.5rem;"><span>Shop the Collection</span></a>
+  </div>
+  <div class="manifesto-pullquote reveal">
+    <p>"The question is not whether you can think — it's whether your outfit is doing it for you."</p>
+  </div>
+</section>
+
+<!-- SCHOOLS -->
+<section class="schools" id="schools">
+  <h2 class="reveal">Shop by Tradition</h2>
+  <div class="schools-grid">
+    <div class="school-card reveal">
+      <span class="school-glyph">🏛️</span>
+      <div class="school-name">Stoicism</div>
+      <div class="school-desc">Equanimity, virtue, dichotomy of control</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">🌑</span>
+      <div class="school-name">Existentialism</div>
+      <div class="school-desc">Radical freedom, bad faith, nausea</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">🎭</span>
+      <div class="school-name">Absurdism</div>
+      <div class="school-desc">Revolt, freedom, passion</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">🔬</span>
+      <div class="school-name">Empiricism</div>
+      <div class="school-desc">Sensation, experience, tabula rasa</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">⚖️</span>
+      <div class="school-name">Ethics</div>
+      <div class="school-desc">The good life, duty, consequences</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">🌊</span>
+      <div class="school-name">Taoism</div>
+      <div class="school-desc">Harmony, wu wei, the eternal way</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">🧩</span>
+      <div class="school-name">Logic</div>
+      <div class="school-desc">Validity, soundness, contradictions</div>
+    </div>
+    <div class="school-card reveal">
+      <span class="school-glyph">💀</span>
+      <div class="school-name">Nihilism</div>
+      <div class="school-desc">Nothing matters — in a liberating way</div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <h2 class="reveal">Dispatch from the <em>Examined Life</em></h2>
+  <p class="reveal">Monthly thoughts, new shirts, and one philosophical provocation per issue. No spam. Socrates would approve.</p>
+  <div class="newsletter-form reveal">
+    <input type="email" placeholder="your@email.com">
+    <button type="button">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Goony<span>shirts</span></a>
+  <p class="footer-copy">© 2025 Goonyshirts.com — All shirts, all questions.</p>
+  <ul class="footer-links">
+    <li><a href="#">Sizing</a></li>
+    <li><a href="#">Returns</a></li>
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+</footer>
+
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-img" id="modal-img">
+      <img src="" alt="" id="modal-image">
+    </div>
+    <div class="modal-body">
+      <div>
+        <span class="modal-tag">Philosophy 101</span>
+        <div class="modal-name" id="modal-name"></div>
+        <div class="modal-price" id="modal-price"></div>
+        <div id="modal-variants-wrap">
+          <div class="modal-loading">Loading options...</div>
+        </div>
+      </div>
+      <button class="modal-add-btn" id="modal-add-btn" disabled>Select options above</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'https://goonyshirts-server-production.up.railway.app';
+
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Cart — persisted in localStorage
+  const cartBtn = document.querySelector('.nav-cart');
+  
+  // Load cart from localStorage immediately on page load
+  let cart = [];
+  try {
+    const saved = localStorage.getItem('goonyshirts_cart');
+    if (saved) cart = JSON.parse(saved);
+  } catch(e) { cart = []; }
+
+  // Clear cart only if returning from successful Stripe checkout
+  if (window.location.search.includes('session_id=')) {
+    cart = [];
+    localStorage.removeItem('goonyshirts_cart');
+  }
+
+  function saveCart() {
+    localStorage.setItem('goonyshirts_cart', JSON.stringify(cart));
+  }
+
+  function updateCartUI() {
+    const count = cart.reduce((sum, i) => sum + (i.quantity || 1), 0);
+    cartBtn.textContent = 'Cart (' + count + ')';
+  }
+
+  function addToCart(product) {
+    const existing = cart.find(i => i.id === product.id && i.size === product.size && i.color === product.color);
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    updateCartUI();
+    saveCart();
+  }
+
+  updateCartUI();
+
+  // Load real products from Printful via Railway
+  async function loadProducts() {
+    const grid = document.getElementById('products-grid');
+    try {
+      const res = await fetch(`${API}/products`);
+      const data = await res.json();
+      const products = data.result || [];
+
+      if (!products.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--mist);font-family:DM Mono,monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;">No products found.</div>';
+        return;
+      }
+
+      // Store products globally for modal
+      window._allProducts = products;
+
+      grid.innerHTML = products.map(p => `
+        <div class="product-card reveal" data-id="${p.id}">
+          <div class="product-img-wrap">
+            ${p.thumbnail_url
+              ? `<img src="${p.thumbnail_url}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;">`
+              : `<svg class="shirt-icon" viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M55 22 L35 55 L8 42 L20 95 L40 88 L40 200 L160 200 L160 88 L180 95 L192 42 L165 55 L145 22 Q130 8 100 8 Q70 8 55 22Z" fill="#221f1b" stroke="#3a3530" stroke-width="1"/>
+                  <text x="100" y="120" text-anchor="middle" font-family="Playfair Display, serif" font-size="11" font-style="italic" fill="#c9962a">${p.name}</text>
+                </svg>`
+            }
+          </div>
+          <div class="product-overlay">
+            <button class="overlay-btn">Choose Options</button>
+          </div>
+          <div class="product-info">
+            <span class="product-tag">Philosophy 101</span>
+            <div class="product-name">${p.name}</div>
+            <div class="product-price">${p.price ? '$' + parseFloat(p.price).toFixed(2) : '$38.00'}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // Re-observe new elements
+      grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      grid.querySelectorAll('a, button, .product-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+
+    } catch (err) {
+      console.error('Failed to load products:', err);
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--mist);font-family:DM Mono,monospace;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;">Could not load products. Please refresh.</div>';
+    }
+  }
+
+  function handleAddToCart(id, name, image, price, variantId) {
+    addToCart({ id, name, image, price: parseFloat(price), variantId });
+    const btn = document.querySelector(`[data-id="${id}"] .overlay-btn`);
+    if (btn) {
+      btn.textContent = 'Added ✓';
+      setTimeout(() => btn.textContent = 'Add to Cart', 1800);
+    }
+  }
+
+  function openProductModal(id) {
+    const product = (window._allProducts || []).find(p => p.id === id);
+    if (product) openModal(product);
+  }
+
+  // Use event delegation for product card clicks
+  document.getElementById('products-grid').addEventListener('click', function(e) {
+    const card = e.target.closest('.product-card');
+    if (!card) return;
+    const id = parseInt(card.dataset.id);
+    openProductModal(id);
+  });
+
+  loadProducts();
+
+  // ─── Modal logic ─────────────────────────────────────────────────────────────
+  const modalOverlay = document.getElementById('modal-overlay');
+  const modalClose = document.getElementById('modal-close');
+  const modalName = document.getElementById('modal-name');
+  const modalPrice = document.getElementById('modal-price');
+  const modalImage = document.getElementById('modal-image');
+  const modalVariantsWrap = document.getElementById('modal-variants-wrap');
+  const modalAddBtn = document.getElementById('modal-add-btn');
+
+  let currentProduct = null;
+
+  function openModal(product) {
+    currentProduct = product;
+    modalName.textContent = product.name;
+    modalPrice.textContent = product.price ? '$' + parseFloat(product.price).toFixed(2) : '$38.00';
+    modalImage.src = product.thumbnail_url || '';
+    modalImage.alt = product.name;
+    modalVariantsWrap.innerHTML = '<div class="modal-loading">Loading options...</div>';
+    modalAddBtn.disabled = true;
+    modalAddBtn.textContent = 'Select options above';
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Fetch full product details for variants
+    fetch(`${API}/products/${product.id}`)
+      .then(r => r.json())
+      .then(data => {
+        const variants = data.result?.sync_variants || [];
+        console.log('Colors from Printful:', [...new Set(variants.map(v => v.color).filter(Boolean))]);
+        if (!variants.length) {
+          modalVariantsWrap.innerHTML = '<div class="modal-loading">No variants available.</div>';
+          return;
+        }
+
+        // Extract unique sizes
+        const sizes = [...new Set(variants.map(v => v.size).filter(Boolean))];
+        // Hardcoded Printful color hex codes
+        const PRINTFUL_COLORS = {
+          'Black Heather': '#0b0b0b',
+          'Vintage Black': '#151515',
+          'Black': '#1e1e1e',
+          'Heather Emerald': '#1E2C1C',
+          'Navy': '#212642',
+          'Red': '#d0071e',
+          'Heather Navy': '#303643',
+          'Forest': '#223e25',
+          'Asphalt': '#52514f',
+          'Heather Brown': '#6A513A',
+          'Heather Clay': '#994836',
+          'Heather Slate': '#4C626E',
+          'Olive': '#5b642f',
+        };
+        // Build colorMap from variants using hardcoded colors
+        const colorMap = {};
+        variants.forEach(v => {
+          if (v.color && !(v.color in colorMap)) {
+            // Try exact match first, then case-insensitive match
+            const exactMatch = PRINTFUL_COLORS[v.color];
+            const lowerColor = v.color.toLowerCase();
+            const looseMatch = Object.entries(PRINTFUL_COLORS).find(
+              ([k]) => k.toLowerCase() === lowerColor
+            );
+            colorMap[v.color] = exactMatch || (looseMatch && looseMatch[1]) || '#888888';
+          }
+        });
+
+        let html = '';
+        if (Object.keys(colorMap).length > 0) {
+          html += `<label class="modal-label">Color</label>
+          <div class="color-swatches" id="modal-color-swatches">
+            ${Object.entries(colorMap).map(([name, hex]) => `
+              <div class="color-swatch-item" data-color="${name}" title="${name}">
+                <span class="color-dot" style="background:${hex || '#ccc'};"></span>
+                <span class="color-swatch-name">${name}</span>
+              </div>
+            `).join('')}
+          </div>
+          <input type="hidden" id="modal-color" value="">`;
+        }
+        if (sizes.length > 0) {
+          html += `<label class="modal-label" style="margin-top:0.8rem;">Size</label>
+          <select class="modal-select" id="modal-size">
+            <option value="">Select size...</option>
+            ${sizes.map(s => `<option value="${s}">${s}</option>`).join('')}
+          </select>`;
+        }
+
+        modalVariantsWrap.innerHTML = html;
+        modalVariantsWrap._variants = variants;
+
+        // Color swatch click handler
+        modalVariantsWrap.querySelectorAll('.color-swatch-item').forEach(item => {
+          item.addEventListener('click', () => {
+            modalVariantsWrap.querySelectorAll('.color-swatch-item').forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            document.getElementById('modal-color').value = item.dataset.color;
+            checkModalReady();
+          });
+        });
+
+        // Enable add button when both selected
+        function checkModalReady() {
+          const colorEl = document.getElementById('modal-color');
+          const sizeEl = document.getElementById('modal-size');
+          const colorOk = !colorEl || colorEl.value;
+          const sizeOk = !sizeEl || sizeEl.value;
+          if (colorOk && sizeOk) {
+            modalAddBtn.disabled = false;
+            modalAddBtn.textContent = 'Add to Cart';
+          } else {
+            modalAddBtn.disabled = true;
+            modalAddBtn.textContent = 'Select options above';
+          }
+        }
+        modalVariantsWrap.addEventListener('change', checkModalReady);
+      })
+      .catch(() => {
+        modalVariantsWrap.innerHTML = '<div class="modal-loading">Could not load options.</div>';
+      });
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    currentProduct = null;
+  }
+
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+
+  modalAddBtn.addEventListener('click', () => {
+    if (!currentProduct || modalAddBtn.disabled) return;
+    const colorEl = document.getElementById('modal-color');
+    const sizeEl = document.getElementById('modal-size');
+    const color = colorEl ? colorEl.value : '';
+    const size = sizeEl ? sizeEl.value : '';
+
+    // Find matching variant
+    const variants = modalVariantsWrap._variants || [];
+    const match = variants.find(v =>
+      (!color || v.color === color) && (!size || v.size === size)
+    ) || variants[0];
+
+    const price = match?.retail_price || currentProduct.price || 38;
+    addToCart({
+      id: match?.id || currentProduct.id,
+      name: `${currentProduct.name}${color ? ' — ' + color : ''}${size ? ' / ' + size : ''}`,
+      image: currentProduct.thumbnail_url,
+      price: parseFloat(price),
+      variantId: match?.id || currentProduct.variantId
+    });
+
+    modalAddBtn.textContent = 'Added ✓';
+    setTimeout(() => {
+      closeModal();
+      modalAddBtn.textContent = 'Add to Cart';
+    }, 800);
+  });
+
+
+</script>
+
+<!-- Cart Drawer -->
+<style>
+  #cart-overlay, #cart-overlay * { cursor: none !important; }
+</style>
+<div id="cart-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000;">
+  <div id="cart-drawer" style="position:absolute; right:0; top:0; bottom:0; width:380px; max-width:100vw; background:#f5f0e8; display:flex; flex-direction:column;">
+    <div style="padding:1.5rem; border-bottom:1px solid #d4cfc8; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#0f0d0a;">Your Cart</span>
+      <button id="cart-close" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#0f0d0a;">✕</button>
+    </div>
+    <div id="cart-items" style="flex:1; overflow-y:auto; padding:1rem;"></div>
+    <div style="padding:1.5rem; border-top:1px solid #d4cfc8;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+        <span style="font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase;">Total</span>
+        <span id="cart-total" style="font-family:'DM Mono',monospace; font-size:0.75rem; color:#0f0d0a;"></span>
+      </div>
+      <button id="cart-checkout-btn" style="width:100%; padding:1rem; background:#0f0d0a; color:#f5f0e8; border:none; font-family:'DM Mono',monospace; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; cursor:pointer;">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+<script>
+  // Cart drawer
+  const cartOverlay = document.getElementById('cart-overlay');
+  const cartClose = document.getElementById('cart-close');
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const cartCheckoutBtn = document.getElementById('cart-checkout-btn');
+
+  function renderCartDrawer() {
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p style="font-family:DM Mono,monospace;font-size:0.75rem;color:#8a8075;text-align:center;padding:2rem;letter-spacing:0.1em;">Your cart is empty.</p>';
+      cartTotal.textContent = '$0.00';
+      return;
+    }
+    cartItems.innerHTML = cart.map((item, idx) => `
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding:1rem 0;border-bottom:1px solid #d4cfc8;">
+        ${item.image ? `<img src="${item.image}" style="width:70px;height:70px;object-fit:cover;flex-shrink:0;">` : ''}
+        <div style="flex:1;">
+          <div style="font-family:'Playfair Display',serif;font-size:0.9rem;color:#0f0d0a;margin-bottom:0.25rem;">${item.name}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#8a8075;">Qty: ${item.quantity || 1}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.72rem;color:#0f0d0a;">$${(parseFloat(item.price) * (item.quantity || 1)).toFixed(2)}</div>
+        </div>
+        <button onclick="removeFromCart(${idx})" style="background:none;border:none;color:#8a8075;cursor:pointer;font-size:1rem;padding:0;">✕</button>
+      </div>
+    `).join('');
+    const total = cart.reduce((sum, i) => sum + parseFloat(i.price) * (i.quantity || 1), 0);
+    cartTotal.textContent = '$' + total.toFixed(2);
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    updateCartUI();
+    saveCart();
+    renderCartDrawer();
+  }
+
+  function openCartDrawer() {
+    renderCartDrawer();
+    cartOverlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    // Register cursor hover on drawer elements
+    cartOverlay.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  }
+
+  function closeCartDrawer() {
+    cartOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  cartClose.addEventListener('click', closeCartDrawer);
+  cartOverlay.addEventListener('click', e => { if (e.target === cartOverlay) closeCartDrawer(); });
+
+  // Checkout
+  cartBtn.addEventListener('click', () => {
+    if (cart.length === 0) return;
+    openCartDrawer();
+  });
+
+  cartCheckoutBtn.addEventListener('click', async () => {
+    if (cart.length === 0) return;
+    try {
+      cartCheckoutBtn.textContent = 'Loading...';
+      const res = await fetch(`${API}/create-checkout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Checkout failed. Please try again.');
+        cartCheckoutBtn.textContent = 'Proceed to Checkout';
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Could not connect to checkout. Please try again.');
+      cartCheckoutBtn.textContent = 'Proceed to Checkout';
+    }
+  });
+</script>
+</body>
+</html>
+
