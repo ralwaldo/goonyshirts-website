@@ -1406,6 +1406,13 @@
   if (window.location.search.includes('session_id=')) {
     cart = [];
     localStorage.removeItem('goonyshirts_cart');
+    // Show success banner
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#2c4a1e;color:#f5f0e8;text-align:center;padding:1.2rem 2rem;font-family:DM Mono,monospace;font-size:0.85rem;letter-spacing:0.1em;';
+    banner.innerHTML = '✓ &nbsp; ORDER CONFIRMED — Thank you for your purchase! A confirmation email is on its way. &nbsp; <span onclick="this.parentElement.remove()" style="cursor:pointer;opacity:0.6;margin-left:1rem;">✕</span>';
+    document.body.prepend(banner);
+    setTimeout(() => { if(banner.parentElement) banner.remove(); }, 10000);
+    window.history.replaceState({}, '', '/');
   }
 
   function saveCart() {
