@@ -1167,6 +1167,436 @@
     }
   }
 
+
+  /* ── Wholesale Section ─────────────────────────────────────── */
+  .wholesale {
+    background: var(--ink);
+    padding: 6rem 4rem;
+    color: var(--parchment);
+  }
+
+  .wholesale-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .wholesale-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .wholesale h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--parchment);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .wholesale h2 em {
+    color: var(--rust);
+    font-style: italic;
+  }
+
+  .wholesale-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #a09890;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .wholesale-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border: 1px solid #3a3530;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .wholesale-feature {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .feature-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--gold);
+    min-width: 80px;
+  }
+
+  .feature-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #c4bfb8;
+    text-transform: uppercase;
+  }
+
+  .wholesale-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #6a6560;
+    line-height: 1.6;
+  }
+
+  .wholesale-form-wrap {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid #3a3530;
+    padding: 2.5rem;
+  }
+
+  .wholesale-form-wrap h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: #6a6560;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .ws-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #3a3530;
+    padding: 0.8rem 0;
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+
+  .ws-input:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .ws-input::placeholder {
+    color: #4a4540;
+  }
+
+  .ws-textarea {
+    height: 100px;
+    resize: vertical;
+    border: 1px solid #3a3530;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .ws-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--rust);
+    color: var(--parchment);
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    margin-top: 1rem;
+    transition: background 0.2s;
+  }
+
+  .ws-submit:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  @media (max-width: 768px) {
+    .wholesale {
+      padding: 4rem 1.5rem;
+    }
+    .wholesale-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+
+  .ws-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .ws-order-table {
+    border: 1px solid #3a3530;
+    overflow: hidden;
+  }
+
+  .ws-order-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    background: rgba(255,255,255,0.05);
+    padding: 0.6rem 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    gap: 0.5rem;
+  }
+
+  .ws-order-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 0.5rem 0.8rem;
+    border-top: 1px solid #2a2520;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ws-order-row:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .ws-design-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--parchment);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .ws-qty-input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #3a3530;
+    color: var(--parchment);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.3rem;
+    outline: none;
+  }
+
+  .ws-qty-input:focus {
+    border-color: var(--gold);
+  }
+
+  .ws-order-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background: rgba(255,255,255,0.05);
+    border-top: 1px solid #3a3530;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: #a09890;
+    letter-spacing: 0.05em;
+  }
+
+  .ws-order-footer strong {
+    color: var(--gold);
+  }
+
+  .ws-loading {
+    padding: 1rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: #4a4540;
+    letter-spacing: 0.1em;
+  }
+
+
+  /* ── Contact Section ──────────────────────────────────────── */
+  .contact-section {
+    background: var(--parchment);
+    padding: 6rem 4rem;
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .contact-section h2 em {
+    color: var(--rust);
+    font-style: italic;
+  }
+
+  .contact-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #6a6560;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .contact-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #e0dbd3;
+  }
+
+  .contact-info-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #a09890;
+  }
+
+  .contact-info-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .contact-info-value:hover {
+    color: var(--rust);
+  }
+
+  .contact-form-wrap {
+    background: white;
+    border: 1px solid #e0dbd3;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .ct-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #e0dbd3;
+    padding: 0.8rem 0;
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+
+  .ct-input:focus {
+    border-bottom-color: var(--rust);
+  }
+
+  .ct-input::placeholder {
+    color: #c4bfb8;
+  }
+
+  .ct-textarea {
+    height: 120px;
+    resize: vertical;
+    border: 1px solid #e0dbd3;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  .ct-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--ink);
+    color: var(--parchment);
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    margin-top: 1rem;
+    transition: background 0.2s;
+  }
+
+  .ct-submit:hover {
+    background: var(--rust);
+  }
+
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: 4rem 1.5rem;
+    }
+    .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+
+  .schools-intro {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #6a6560;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .school-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: #6a6560;
+    line-height: 1.7;
+    margin-top: 0.5rem;
+  }
+
 </style>
 </head>
 <body>
@@ -1179,6 +1609,7 @@
   <ul class="nav-links">
     <li><a href="#products">Shop</a></li>
     <li><a href="#manifesto">Manifesto</a></li>
+            <li><a href="#wholesale">Wholesale</a></li>
     <li><a href="#schools">Traditions</a></li>
     <li><a href="#newsletter">Contact</a></li>
   </ul>
@@ -1283,47 +1714,48 @@
 
 <!-- SCHOOLS -->
 <section class="schools" id="schools">
-  <h2 class="reveal">Shop by Tradition</h2>
+  <h2 class="reveal">Traditions</h2>
+  <p class="reveal schools-intro">Philosophy has given humanity its most enduring questions. Here are the traditions that have shaped how we think, doubt, and wonder.</p>
   <div class="schools-grid">
     <div class="school-card reveal">
       <span class="school-glyph">🏛️</span>
       <div class="school-name">Stoicism</div>
-      <div class="school-desc">Equanimity, virtue, dichotomy of control</div>
+      <div class="school-desc">Born in ancient Athens, Stoicism teaches that virtue is the only true good. Marcus Aurelius, Epictetus, and Seneca showed us that we cannot control the world — only our response to it. Equanimity in all things.</div>
     </div>
     <div class="school-card reveal">
       <span class="school-glyph">🌑</span>
       <div class="school-name">Existentialism</div>
-      <div class="school-desc">Radical freedom, bad faith, nausea</div>
+      <div class="school-desc">Sartre declared existence precedes essence — we are thrown into the world with no predetermined purpose. Camus, de Beauvoir, and Kierkegaard wrestled with radical freedom, authenticity, and the burden of choice.</div>
     </div>
     <div class="school-card reveal">
       <span class="school-glyph">🎭</span>
       <div class="school-name">Absurdism</div>
-      <div class="school-desc">Revolt, freedom, passion</div>
+      <div class="school-desc">Camus argued that life has no inherent meaning — and that's okay. The absurd hero embraces this contradiction and revolts against meaninglessness with passion and freedom. One must imagine Sisyphus happy.</div>
     </div>
     <div class="school-card reveal">
       <span class="school-glyph">🔬</span>
       <div class="school-name">Empiricism</div>
-      <div class="school-desc">Sensation, experience, tabula rasa</div>
+      <div class="school-desc">Locke, Hume, and Berkeley insisted all knowledge comes from experience and the senses. The mind begins as a blank slate. Nothing exists in the intellect that was not first in the senses.</div>
     </div>
     <div class="school-card reveal">
-      <span class="school-glyph">⚖️</span>
-      <div class="school-name">Ethics</div>
-      <div class="school-desc">The good life, duty, consequences</div>
+      <span class="school-glyph">🧠</span>
+      <div class="school-name">Rationalism</div>
+      <div class="school-desc">Descartes, Spinoza, and Leibniz trusted reason over the senses. Cogito ergo sum — I think therefore I am. Truth is discovered through pure reason and innate ideas, not merely through what we observe.</div>
     </div>
     <div class="school-card reveal">
       <span class="school-glyph">🌊</span>
       <div class="school-name">Taoism</div>
-      <div class="school-desc">Harmony, wu wei, the eternal way</div>
+      <div class="school-desc">The Tao that can be named is not the eternal Tao. Laozi's ancient Chinese philosophy teaches harmony with the natural order, the power of non-action, and the wisdom of flowing like water around obstacles.</div>
     </div>
     <div class="school-card reveal">
-      <span class="school-glyph">🧩</span>
-      <div class="school-name">Logic</div>
-      <div class="school-desc">Validity, soundness, contradictions</div>
+      <span class="school-glyph">⚖️</span>
+      <div class="school-name">Ethics</div>
+      <div class="school-desc">From Aristotle's virtue ethics to Kant's categorical imperative to Mill's utilitarianism — philosophy has always asked what it means to live well and act rightly. The examined life is the ethical life.</div>
     </div>
     <div class="school-card reveal">
       <span class="school-glyph">💀</span>
       <div class="school-name">Nihilism</div>
-      <div class="school-desc">Nothing matters — in a liberating way</div>
+      <div class="school-desc">Nietzsche declared God is dead — and with him, absolute values and universal truth. Nihilism confronts the void head-on. Far from being depressing, it can be the first step toward creating your own meaning.</div>
     </div>
   </div>
 </section>
@@ -1339,6 +1771,95 @@
 </section>
 
 <!-- FOOTER -->
+
+
+<!-- Contact Section -->
+<section class="contact-section reveal" id="contact">
+  <div class="contact-inner">
+    <div class="contact-text">
+      <span class="contact-tag">Get In Touch</span>
+      <h2>We'd Love to <em>Hear From You</em></h2>
+      <p class="contact-intro">Questions about your order, sizing, returns, or just want to talk philosophy? We're here for all of it.</p>
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <span class="contact-info-label">Email</span>
+          <a href="mailto:hello@goonyshirts.com" class="contact-info-value">hello@goonyshirts.com</a>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-info-label">Response time</span>
+          <span class="contact-info-value">Within 24 hours</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="contact-info-label">Wholesale inquiries</span>
+          <a href="#wholesale" class="contact-info-value">See our wholesale page ↓</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap">
+      <input type="text" id="ct-name" placeholder="Your name" class="ct-input">
+      <input type="email" id="ct-email" placeholder="Email address" class="ct-input">
+      <input type="text" id="ct-subject" placeholder="Subject" class="ct-input">
+      <textarea id="ct-message" placeholder="Your message..." class="ct-input ct-textarea"></textarea>
+      <button class="ct-submit" onclick="submitContact()"><span>Send Message</span></button>
+      <p id="ct-confirmation" style="display:none;color:#c9962a;font-family:'DM Mono',monospace;font-size:0.8rem;margin-top:1rem;">✓ Message sent! We'll be in touch within 24 hours.</p>
+    </div>
+  </div>
+</section>
+<!-- Wholesale Section -->
+<section class="wholesale reveal" id="wholesale">
+  <div class="wholesale-inner">
+    <div class="wholesale-text">
+      <span class="wholesale-tag">For Retailers & Gift Shops</span>
+      <h2>Wholesale <em>Program</em></h2>
+      <p class="wholesale-intro">Bring Goonyshirts to your store. Our philosophy-inspired tees are conversation starters that sell themselves — perfect for gift shops, bookstores, museum shops, and boutiques.</p>
+      <div class="wholesale-features">
+        <div class="wholesale-feature">
+          <span class="feature-num">12</span>
+          <span class="feature-label">Minimum order quantity per design</span>
+        </div>
+        <div class="wholesale-feature">
+          <span class="feature-num">$15–17</span>
+          <span class="feature-label">Wholesale price per shirt</span>
+        </div>
+        <div class="wholesale-feature">
+          <span class="feature-num">20+</span>
+          <span class="feature-label">Unique philosophical designs</span>
+        </div>
+      </div>
+      <p class="wholesale-note">Mix and match designs and sizes. Custom orders welcome. Net 30 terms available for established retailers.</p>
+    </div>
+    <div class="wholesale-form-wrap">
+      <h3>Place a Wholesale Order</h3>
+      <p class="form-note">Minimum 12 shirts · $15–17 per shirt · Mix designs & sizes</p>
+      <div class="wholesale-form">
+        <div class="ws-section-label">Your Information</div>
+        <input type="text" id="ws-name" placeholder="Your name" class="ws-input">
+        <input type="text" id="ws-store" placeholder="Store name" class="ws-input">
+        <input type="email" id="ws-email" placeholder="Email address" class="ws-input">
+        <input type="text" id="ws-phone" placeholder="Phone number" class="ws-input">
+        <input type="text" id="ws-address" placeholder="Shipping address" class="ws-input">
+        <input type="text" id="ws-city" placeholder="City, State, ZIP" class="ws-input">
+
+        <div class="ws-section-label" style="margin-top:1.5rem;">Order Details</div>
+        <div class="ws-order-table">
+          <div class="ws-order-header">
+            <span>Design</span><span>S</span><span>M</span><span>L</span><span>XL</span><span>2XL</span>
+          </div>
+          <div id="ws-order-rows"></div>
+          <div class="ws-order-footer">
+            <span>Total shirts: <strong id="ws-total-count">0</strong></span>
+            <span>Est. total: <strong id="ws-total-price">$0</strong></span>
+          </div>
+        </div>
+
+        <textarea id="ws-notes" placeholder="Special requests or notes..." class="ws-input ws-textarea" style="margin-top:1rem;"></textarea>
+        <button class="ws-submit" onclick="submitWholesaleOrder()"><span>Submit Order</span></button>
+        <p style="font-family:'DM Mono',monospace;font-size:0.65rem;color:#4a4540;margin-top:0.8rem;letter-spacing:0.05em;">We'll review your order and send an invoice within 48 hours. No payment required now.</p>
+        <p id="ws-confirmation" style="display:none;color:#2c4a1e;font-family:'DM Mono',monospace;font-size:0.8rem;margin-top:1rem;">✓ Order submitted! We'll send your invoice within 48 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <footer>
   <a href="#" class="footer-logo">Goony<span>shirts</span></a>
   <p class="footer-copy">© 2025 Goonyshirts.com — All shirts, all questions.</p>
@@ -1777,6 +2298,123 @@
       cartCheckoutBtn.textContent = 'Proceed to Checkout';
     }
   });
+
+  // Wholesale order form
+  const WHOLESALE_PRICE = 16;
+
+
+  function submitContact() {
+    const name = document.getElementById('ct-name').value;
+    const email = document.getElementById('ct-email').value;
+    const subject = document.getElementById('ct-subject').value;
+    const message = document.getElementById('ct-message').value;
+
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email and message.');
+      return;
+    }
+
+    const emailSubject = encodeURIComponent(subject || 'Customer inquiry from ' + name);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n\n' +
+      message
+    );
+    window.location.href = 'mailto:hello@goonyshirts.com?subject=' + emailSubject + '&body=' + body;
+    document.getElementById('ct-confirmation').style.display = 'block';
+  }
+
+  function initWholesaleForm() {
+    const rows = document.getElementById('ws-order-rows');
+    if (!rows) return;
+    rows.innerHTML = '<div class="ws-loading">Loading designs...</div>';
+
+    fetch(API + '/products')
+      .then(r => r.json())
+      .then(data => {
+        const products = data.result || [];
+        rows.innerHTML = products.map(p => `
+          <div class="ws-order-row">
+            <span class="ws-design-name" title="${p.name}">${p.name}</span>
+            <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="S" oninput="updateWholesaleTotal()">
+            <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="M" oninput="updateWholesaleTotal()">
+            <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="L" oninput="updateWholesaleTotal()">
+            <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="XL" oninput="updateWholesaleTotal()">
+            <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="2XL" oninput="updateWholesaleTotal()">
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        rows.innerHTML = '<div class="ws-loading">Could not load designs. Please email hello@goonyshirts.com</div>';
+      });
+  }
+
+  function updateWholesaleTotal() {
+    const inputs = document.querySelectorAll('.ws-qty-input');
+    let total = 0;
+    inputs.forEach(input => { total += parseInt(input.value) || 0; });
+    document.getElementById('ws-total-count').textContent = total;
+    document.getElementById('ws-total-price').textContent = '$' + (total * WHOLESALE_PRICE).toLocaleString();
+  }
+
+  function submitWholesaleOrder() {
+    const name = document.getElementById('ws-name').value;
+    const store = document.getElementById('ws-store').value;
+    const email = document.getElementById('ws-email').value;
+    const phone = document.getElementById('ws-phone').value;
+    const address = document.getElementById('ws-address').value;
+    const city = document.getElementById('ws-city').value;
+    const notes = document.getElementById('ws-notes').value;
+    const totalCount = parseInt(document.getElementById('ws-total-count').textContent);
+
+    if (!name || !store || !email) {
+      alert('Please fill in your name, store name and email.');
+      return;
+    }
+    if (totalCount < 12) {
+      alert('Minimum order is 12 shirts. You have ' + totalCount + ' selected.');
+      return;
+    }
+
+    // Build order summary
+    const inputs = document.querySelectorAll('.ws-qty-input');
+    let orderLines = '';
+    inputs.forEach(input => {
+      const qty = parseInt(input.value) || 0;
+      if (qty > 0) {
+        orderLines += input.dataset.design + ' - ' + input.dataset.size + ': ' + qty + '\n';
+      }
+    });
+
+    const subject = encodeURIComponent('Wholesale Order - ' + store);
+    const body = encodeURIComponent(
+      'WHOLESALE ORDER\n' +
+      '===============\n\n' +
+      'Name: ' + name + '\n' +
+      'Store: ' + store + '\n' +
+      'Email: ' + email + '\n' +
+      'Phone: ' + phone + '\n' +
+      'Ship to: ' + address + ', ' + city + '\n\n' +
+      'ORDER:\n' + orderLines + '\n' +
+      'Total shirts: ' + totalCount + '\n' +
+      'Estimated total: $' + (totalCount * WHOLESALE_PRICE) + '\n\n' +
+      'Notes: ' + notes
+    );
+
+    window.location.href = 'mailto:hello@goonyshirts.com?subject=' + subject + '&body=' + body;
+    document.getElementById('ws-confirmation').style.display = 'block';
+  }
+
+  // Init wholesale form when section is in view
+  const wsObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      initWholesaleForm();
+      wsObserver.disconnect();
+    }
+  });
+  const wsSection = document.getElementById('wholesale');
+  if (wsSection) wsObserver.observe(wsSection);
+
 </script>
 </body>
 </html>
