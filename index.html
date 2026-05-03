@@ -1355,7 +1355,7 @@
 
   .ws-order-header {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr 1fr;
     background: rgba(255,255,255,0.05);
     padding: 0.6rem 0.8rem;
     font-family: 'DM Mono', monospace;
@@ -1368,11 +1368,32 @@
 
   .ws-order-row {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr 1fr;
     padding: 0.5rem 0.8rem;
     border-top: 1px solid #2a2520;
     align-items: center;
     gap: 0.5rem;
+  }
+
+  .ws-color-select {
+    width: 100%;
+    background: #1a1714;
+    border: 1px solid #3a3530;
+    color: var(--parchment);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.3rem;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .ws-color-select:focus {
+    border-color: var(--gold);
+  }
+
+  .ws-color-select option {
+    background: #1a1714;
+    color: var(--parchment);
   }
 
   .ws-order-row:hover {
@@ -1843,7 +1864,7 @@
         <div class="ws-section-label" style="margin-top:1.5rem;">Order Details</div>
         <div class="ws-order-table">
           <div class="ws-order-header">
-            <span>Design</span><span>S</span><span>M</span><span>L</span><span>XL</span><span>2XL</span>
+            <span>Design</span><span>Colors</span><span>S</span><span>M</span><span>L</span><span>XL</span><span>2XL</span>
           </div>
           <div id="ws-order-rows"></div>
           <div class="ws-order-footer">
@@ -2336,6 +2357,20 @@
         rows.innerHTML = products.map(p => `
           <div class="ws-order-row">
             <span class="ws-design-name" title="${p.name}">${p.name}</span>
+            <select class="ws-color-select" data-design="${p.name}" multiple size="3">
+              <option value="Black Heather">Black Heather</option>
+              <option value="Vintage Black">Vintage Black</option>
+              <option value="Navy">Navy</option>
+              <option value="Heather Emerald">Heather Emerald</option>
+              <option value="Red">Red</option>
+              <option value="Heather Navy">Heather Navy</option>
+              <option value="Forest">Forest</option>
+              <option value="Asphalt">Asphalt</option>
+              <option value="Heather Brown">Heather Brown</option>
+              <option value="Heather Clay">Heather Clay</option>
+              <option value="Heather Slate">Heather Slate</option>
+              <option value="Olive">Olive</option>
+            </select>
             <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="S" oninput="updateWholesaleTotal()">
             <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="M" oninput="updateWholesaleTotal()">
             <input type="number" min="0" value="0" class="ws-qty-input" data-design="${p.name}" data-size="L" oninput="updateWholesaleTotal()">
@@ -2378,9 +2413,16 @@
 
     // Build order object
     const order = {};
-    document.querySelectorAll('.ws-qty-input').forEach(input => {
-      const qty = parseInt(input.value) || 0;
-      if (qty > 0) order[input.dataset.design + ' - ' + input.dataset.size] = qty;
+    document.querySelectorAll('.ws-order-row').forEach(row => {
+      const select = row.querySelector('.ws-color-select');
+      const selectedColors = select ? Array.from(select.selectedOptions).map(o => o.value) : [];
+      row.querySelectorAll('.ws-qty-input').forEach(input => {
+        const qty = parseInt(input.value) || 0;
+        if (qty > 0) {
+          const key = input.dataset.design + ' - ' + input.dataset.size + (selectedColors.length ? ' (' + selectedColors.join(', ') + ')' : '');
+          order[key] = qty;
+        }
+      });
     });
 
     const btn = document.querySelector('.ws-submit');
