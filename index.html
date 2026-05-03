@@ -2357,7 +2357,7 @@
     document.getElementById('ws-total-price').textContent = '$' + (total * WHOLESALE_PRICE).toLocaleString();
   }
 
-  function submitWholesaleOrder() {
+  async function submitWholesaleOrder() {
     const name = document.getElementById('ws-name').value;
     const store = document.getElementById('ws-store').value;
     const email = document.getElementById('ws-email').value;
@@ -2376,33 +2376,38 @@
       return;
     }
 
-    // Build order summary
-    const inputs = document.querySelectorAll('.ws-qty-input');
-    let orderLines = '';
-    inputs.forEach(input => {
+    // Build order object
+    const order = {};
+    document.querySelectorAll('.ws-qty-input').forEach(input => {
       const qty = parseInt(input.value) || 0;
-      if (qty > 0) {
-        orderLines += input.dataset.design + ' - ' + input.dataset.size + ': ' + qty + '\n';
-      }
+      if (qty > 0) order[input.dataset.design + ' - ' + input.dataset.size] = qty;
     });
 
-    const subject = encodeURIComponent('Wholesale Order - ' + store);
-    const body = encodeURIComponent(
-      'WHOLESALE ORDER\n' +
-      '===============\n\n' +
-      'Name: ' + name + '\n' +
-      'Store: ' + store + '\n' +
-      'Email: ' + email + '\n' +
-      'Phone: ' + phone + '\n' +
-      'Ship to: ' + address + ', ' + city + '\n\n' +
-      'ORDER:\n' + orderLines + '\n' +
-      'Total shirts: ' + totalCount + '\n' +
-      'Estimated total: $' + (totalCount * WHOLESALE_PRICE) + '\n\n' +
-      'Notes: ' + notes
-    );
+    const btn = document.querySelector('.ws-submit');
+    btn.textContent = 'Sending...';
 
-    window.location.href = 'mailto:hello@goonyshirts.com?subject=' + subject + '&body=' + body;
-    document.getElementById('ws-confirmation').style.display = 'block';
+    try {
+      const res = await fetch(API + '/wholesale-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, store, email, phone, address, city, notes, order,
+          totalCount,
+          totalPrice: '$' + (totalCount * WHOLESALE_PRICE)
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('ws-confirmation').style.display = 'block';
+        btn.textContent = 'Order Submitted!';
+      } else {
+        alert('Something went wrong. Please email hello@goonyshirts.com directly.');
+        btn.textContent = 'Submit Order';
+      }
+    } catch (err) {
+      alert('Something went wrong. Please email hello@goonyshirts.com directly.');
+      btn.textContent = 'Submit Order';
+    }
   }
 
   // Init wholesale form when section is in view
