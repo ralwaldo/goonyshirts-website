@@ -1350,12 +1350,13 @@
 
   .ws-order-table {
     border: 1px solid #3a3530;
-    overflow: hidden;
+    overflow-x: auto;
   }
 
   .ws-order-header {
     display: grid;
-    grid-template-columns: 2fr 5fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 160px 220px 60px 60px 60px 60px 60px;
+    min-width: 700px;
     background: rgba(255,255,255,0.05);
     padding: 0.6rem 0.8rem;
     font-family: 'DM Mono', monospace;
@@ -1368,7 +1369,8 @@
 
   .ws-order-row {
     display: grid;
-    grid-template-columns: 2fr 5fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 160px 220px 60px 60px 60px 60px 60px;
+    min-width: 700px;
     padding: 0.5rem 0.8rem;
     border-top: 1px solid #2a2520;
     align-items: center;
