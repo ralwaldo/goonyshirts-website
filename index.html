@@ -1355,8 +1355,8 @@
 
   .ws-order-header {
     display: grid;
-    grid-template-columns: 160px 220px 60px 60px 60px 60px 60px;
-    min-width: 700px;
+    grid-template-columns: 160px 220px 70px 70px 70px 70px 70px;
+    min-width: 740px;
     background: rgba(255,255,255,0.05);
     padding: 0.6rem 0.8rem;
     font-family: 'DM Mono', monospace;
@@ -1369,8 +1369,8 @@
 
   .ws-order-row {
     display: grid;
-    grid-template-columns: 160px 220px 60px 60px 60px 60px 60px;
-    min-width: 700px;
+    grid-template-columns: 160px 220px 70px 70px 70px 70px 70px;
+    min-width: 740px;
     padding: 0.5rem 0.8rem;
     border-top: 1px solid #2a2520;
     align-items: center;
@@ -1459,18 +1459,27 @@
 
   .ws-qty-input {
     width: 100%;
-    background: transparent;
+    background: #1a1714;
     border: 1px solid #3a3530;
-    color: var(--parchment);
+    color: #ffffff;
     font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     text-align: center;
-    padding: 0.3rem;
+    padding: 0.4rem 0.1rem;
     outline: none;
+    -moz-appearance: textfield;
+  }
+
+  .ws-qty-input::-webkit-inner-spin-button,
+  .ws-qty-input::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 28px;
   }
 
   .ws-qty-input:focus {
     border-color: var(--gold);
+    background: #252018;
   }
 
   .ws-order-footer {
