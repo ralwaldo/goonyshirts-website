@@ -3,12 +3,18 @@ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const axios = require('axios');
 const cors = require('cors');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
+app.use((req, res, next) => {
+  if (req.path === '/webhook') return next();
+  express.json()(req, res, next);
+});
 
 // Raw body needed for Stripe webhook signature verification
 app.use('/webhook', express.raw({ type: 'application/json' }));
@@ -33,8 +39,17 @@ app.get('/', (req, res) => {
 // GET /products — fetch all products from Printful with pricing
 app.get('/products', async (req, res) => {
   try {
-    const response = await printful.get('/store/products');
-    const products = response.data.result;
+    // Fetch all products across all pages
+    let products = [];
+    let offset = 0;
+    const limit = 100;
+    while (true) {
+      const response = await printful.get(`/store/products?limit=${limit}&offset=${offset}`);
+      const batch = response.data.result;
+      products = products.concat(batch);
+      if (batch.length < limit) break;
+      offset += limit;
+    }
 
     // Fetch variant details (including price) for each product
     const detailed = await Promise.all(products.map(async (p) => {
@@ -49,7 +64,7 @@ app.get('/products', async (req, res) => {
       }
     }));
 
-    res.json({ ...response.data, result: detailed });
+    res.json({ result: detailed });
   } catch (err) {
     console.error('Printful products error:', err.response?.data || err.message);
     res.status(500).json({ error: 'Failed to fetch products from Printful' });
@@ -87,7 +102,6 @@ app.post('/create-checkout', async (req, res) => {
           currency: 'usd',
           product_data: {
             name: item.name,
-          
             images: item.image ? [item.image] : [],
             metadata: {
               printful_variant_id: String(item.variantId || ''),
@@ -106,7 +120,7 @@ app.post('/create-checkout', async (req, res) => {
       shipping_address_collection: {
         allowed_countries: ['US', 'GB', 'CA', 'AU', 'DE', 'FR', 'NL', 'SE', 'NO', 'DK'],
       },
-      success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.FRONTEND_URL}/?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.FRONTEND_URL}/`,
     });
 
@@ -159,10 +173,15 @@ async function fulfillOrder(session) {
   const shipping = fullSession.shipping_details;
   const lineItems = fullSession.line_items.data;
 
-  const printfulItems = lineItems.map((item) => ({
-    variant_id: parseInt(item.price.product.metadata.printful_variant_id),
-    quantity: item.quantity,
-  }));
+  // Use sync variant ID directly - Printful orders API accepts sync variant IDs
+  const printfulItems = lineItems.map((item) => {
+    const syncVariantId = item.price.product.metadata.printful_variant_id;
+    console.log(`Using sync variant ID: ${syncVariantId}`);
+    return {
+      sync_variant_id: parseInt(syncVariantId),
+      quantity: item.quantity,
+    };
+  });
 
   const order = {
     recipient: {
@@ -188,6 +207,91 @@ async function fulfillOrder(session) {
 }
 
 // ─── Start ────────────────────────────────────────────────────────────────────
+// ─── Contact Form Email ──────────────────────────────────────────────────────
+app.post('/contact', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const result = await resend.emails.send({
+      from: 'Goonyshirts <hello@goonyshirts.com>',
+      to: 'hello@goonyshirts.com',
+      reply_to: email,
+      subject: subject ? `Contact: ${subject}` : `Message from ${name}`,
+      text: `
+NEW CONTACT MESSAGE
+===================
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject || '(none)'}
+
+Message:
+${message}
+      `.trim()
+    });
+
+    if (result.error) throw new Error(JSON.stringify(result.error));
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Contact email error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ─── Wholesale Order Email ───────────────────────────────────────────────────
+app.post('/wholesale-order', async (req, res) => {
+  try {
+    const { name, store, email, phone, address, city, order, notes, totalCount, totalPrice } = req.body;
+
+    const orderLines = Object.entries(order || {})
+      .filter(([, qty]) => qty > 0)
+      .map(([key, qty]) => `  ${key}: ${qty}`)
+      .join('\n');
+
+    const result = await resend.emails.send({
+      from: 'Goonyshirts <hello@goonyshirts.com>',
+      to: 'hello@goonyshirts.com',
+      reply_to: email,
+      subject: `Wholesale Order - ${store}`,
+      text: `
+WHOLESALE ORDER
+===============
+
+Name: ${name}
+Store: ${store}
+Email: ${email}
+Phone: ${phone}
+Ship to: ${address}, ${city}
+
+ORDER:
+${orderLines}
+
+Total shirts: ${totalCount}
+Estimated total: ${totalPrice}
+
+Notes: ${notes}
+      `.trim()
+    });
+
+    console.log('Resend result:', JSON.stringify(result));
+
+    if (result.error) {
+      throw new Error(JSON.stringify(result.error));
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Wholesale email error:', err.message);
+    console.error('Full error:', JSON.stringify(err, null, 2));
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Goonyshirts server running on port ${PORT}`);
 });

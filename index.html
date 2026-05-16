@@ -2385,25 +2385,41 @@
   const WHOLESALE_PRICE = 16;
 
 
-  function submitContact() {
-    const name = document.getElementById('ct-name').value;
-    const email = document.getElementById('ct-email').value;
-    const subject = document.getElementById('ct-subject').value;
-    const message = document.getElementById('ct-message').value;
+  async function submitContact() {
+    const name = document.getElementById('ct-name').value.trim();
+    const email = document.getElementById('ct-email').value.trim();
+    const subject = document.getElementById('ct-subject').value.trim();
+    const message = document.getElementById('ct-message').value.trim();
 
     if (!name || !email || !message) {
       alert('Please fill in your name, email and message.');
       return;
     }
 
-    const emailSubject = encodeURIComponent(subject || 'Customer inquiry from ' + name);
-    const body = encodeURIComponent(
-      'Name: ' + name + '\n' +
-      'Email: ' + email + '\n\n' +
-      message
-    );
-    window.location.href = 'mailto:hello@goonyshirts.com?subject=' + emailSubject + '&body=' + body;
-    document.getElementById('ct-confirmation').style.display = 'block';
+    const btn = document.querySelector('.ct-submit');
+    btn.disabled = true;
+    btn.querySelector('span').textContent = 'Sending...';
+
+    try {
+      const res = await fetch(API + '/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+
+      if (!res.ok) throw new Error('Server error');
+
+      document.getElementById('ct-confirmation').style.display = 'block';
+      document.getElementById('ct-name').value = '';
+      document.getElementById('ct-email').value = '';
+      document.getElementById('ct-subject').value = '';
+      document.getElementById('ct-message').value = '';
+      btn.querySelector('span').textContent = 'Sent!';
+    } catch (err) {
+      alert('Something went wrong. Please try again or email us directly at hello@goonyshirts.com');
+      btn.disabled = false;
+      btn.querySelector('span').textContent = 'Send Message';
+    }
   }
 
   function initWholesaleForm() {
