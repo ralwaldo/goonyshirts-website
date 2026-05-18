@@ -166,6 +166,20 @@
   .nav-links a:hover { color: var(--rust); }
   .nav-links a:hover::after { width: 100%; }
 
+  .nav-links a.nav-wholesale {
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 0.3rem 0.75rem;
+    border-radius: 1px;
+    letter-spacing: 0.14em;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links a.nav-wholesale:hover {
+    background: var(--gold);
+    color: #1a1714;
+  }
+  .nav-links a.nav-wholesale::after { display: none; }
+
   .nav-cart {
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
@@ -1687,7 +1701,7 @@
   <ul class="nav-links">
     <li><a href="#products">Shop</a></li>
     <li><a href="#manifesto">Manifesto</a></li>
-            <li><a href="#wholesale">Wholesale</a></li>
+            <li><a href="#wholesale" class="nav-wholesale" onclick="event.preventDefault(); document.getElementById('wholesale').scrollIntoView({behavior:'smooth'});">Wholesale</a></li>
     <li><a href="#schools">Traditions</a></li>
     <li><a href="#newsletter">Contact</a></li>
   </ul>
