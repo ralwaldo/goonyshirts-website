@@ -166,17 +166,26 @@
   .nav-links a:hover { color: var(--rust); }
   .nav-links a:hover::after { width: 100%; }
 
+  @keyframes wholesaleGlow {
+    0%, 100% { box-shadow: 0 0 6px rgba(192,160,98,0.4), 0 0 12px rgba(192,160,98,0.2); }
+    50% { box-shadow: 0 0 14px rgba(192,160,98,0.9), 0 0 28px rgba(192,160,98,0.5); }
+  }
+
   .nav-links a.nav-wholesale {
     color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 0.3rem 0.75rem;
+    border: 1.5px solid var(--gold);
+    padding: 0.35rem 0.9rem;
     border-radius: 1px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
+    font-size: 0.8rem;
+    font-weight: 600;
     transition: background 0.2s, color 0.2s;
+    animation: wholesaleGlow 2s ease-in-out infinite;
   }
   .nav-links a.nav-wholesale:hover {
     background: var(--gold);
     color: #1a1714;
+    animation: none;
   }
   .nav-links a.nav-wholesale::after { display: none; }
 
